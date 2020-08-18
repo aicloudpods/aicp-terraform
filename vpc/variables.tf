@@ -1,9 +1,9 @@
 variable "name" {
-  description = "the name of your stack, e.g. \"demo\""
+  description = "the name of your stack"
 }
 
 variable "environment" {
-  description = "the name of your environment, e.g. \"prod\""
+  description = "the name of your environment"
 }
 
 variable "cidr" {

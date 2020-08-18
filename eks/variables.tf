@@ -2,7 +2,6 @@ variable "cluster_name" {
   description = "the name of the EKS Cluster"
 }
 
-
 variable "vpc_name" {
   description = "the name of your stack"
 }
