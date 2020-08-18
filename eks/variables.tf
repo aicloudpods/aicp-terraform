@@ -1,27 +1,27 @@
-variable "name" {
-  description = "the name of your stack, e.g. \"demo\""
+variable "cluster_name" {
+  description = "the name of the EKS Cluster"
 }
 
-variable "environment" {
-  description = "the name of your environment, e.g. \"prod\""
+
+variable "vpc_name" {
+  description = "the name of your stack"
 }
 
-variable "region" {
-  description = "the AWS region in which resources are created, you must set the availability_zones variable as well if you define this value to something other than the default"
-}
-
-variable "vpc_id" {
-  description = "The VPC the cluser should be created in"
-}
-
-variable "private_subnets" {
-  description = "List of private subnet IDs"
+variable "cidr" {
+  description = "The CIDR block for the VPC."
 }
 
 variable "public_subnets" {
-  description = "List of private subnet IDs"
+  type = list(string)
+  description = "List of public subnets"
 }
 
-variable "kubeconfig_path" {
-  description = "Path where the config file for kubectl should be written to"
+variable "private_subnets" {
+  type = list(string)
+  description = "List of private subnets"
+}
+
+variable "availability_zones" {
+  type = list(string)
+  description = "List of availability zones"
 }
