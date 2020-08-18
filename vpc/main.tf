@@ -9,7 +9,6 @@ module "vpc" {
   name = var.name
 
   cidr = var.cidr
-  count = length(var.private_subnets)
 
   azs             = var.availability_zones
   private_subnets = var.private_subnets
@@ -21,17 +20,17 @@ module "vpc" {
   single_nat_gateway = true
 
   public_subnet_tags = {
-    Name                                                   = "${var.name}-${var.environment}-public-subnet-${format("%03d", count.index+1)}",
-    Environment                                            = var.environment,
+    Name                                = "${var.name}-${var.environment}-public-subnet",
+    Environment                         = var.environment,
     "kubernetes.io/cluster/${var.name}" = "shared",
-    "kubernetes.io/role/elb"                               = "1"
+    "kubernetes.io/role/elb"            = "1"
   }
 
   private_subnet_tags = {
-    Name                                                   = "${var.name}-${var.environment}-private-subnet-${format("%03d", count.index+1)}",
-    Environment                                            = var.environment,
+    Name                                = "${var.name}-${var.environment}-private-subnet",
+    Environment                         = var.environment,
     "kubernetes.io/cluster/${var.name}" = "shared"
-    "kubernetes.io/role/internal-elb"                      = "1"
+    "kubernetes.io/role/internal-elb"   = "1"
   }
 
   tags = {
@@ -41,8 +40,8 @@ module "vpc" {
 
 
   vpc_tags = {
-    Name                                                   = "${var.name}-${var.environment}-vpc"
-    Environment                                            = var.environment
+    Name                                = "${var.name}-${var.environment}-vpc"
+    Environment                         = var.environment
     "kubernetes.io/cluster/${var.name}" = "shared"
   }
 }
