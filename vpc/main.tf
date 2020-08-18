@@ -1,5 +1,5 @@
 data "aws_security_group" "default" {
-  name   = "${var.name}-${var.environment}-security-group"
+  name   = "default"
   vpc_id = module.vpc.vpc_id
 }
 
