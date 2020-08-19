@@ -6,6 +6,10 @@ variable "vpc_name" {
   description = "the name of your stack"
 }
 
+variable "kubeconfig_path" {
+  description = "the name of your stack"
+}
+
 variable "cidr" {
   description = "The CIDR block for the VPC."
 }
