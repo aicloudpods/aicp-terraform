@@ -117,7 +117,7 @@ resource "aws_iam_role" "fargate_pod_execution_role" {
 }
 
 resource "aws_eks_fargate_profile" "aicp-fargate-profile" {
-  cluster_name           = module.eks.cluster_arn
+  cluster_name           = var.cluster_name
   fargate_profile_name   = "aicp-fargate-profile"
   pod_execution_role_arn = aws_iam_role.fargate_pod_execution_role.arn
   subnet_ids             = var.private_subnets
