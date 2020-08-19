@@ -120,7 +120,7 @@ resource "aws_eks_fargate_profile" "aicp-fargate-profile" {
   cluster_name           = module.eks.cluster_arn
   fargate_profile_name   = "aicp-fargate-profile"
   pod_execution_role_arn = aws_iam_role.fargate_pod_execution_role.arn
-  subnet_ids             = var.private_subnets.*.id
+  subnet_ids             = var.private_subnets
 
   selector {
     namespace = "kafka"
@@ -137,25 +137,4 @@ resource "aws_eks_fargate_profile" "aicp-fargate-profile" {
   selector {
     namespace = "monitoring"
   }
-}
-
-data "template_file" "kubeconfig" {
-  template = file("${path.module}/templates/kubeconfig.tpl")
-
-  vars = {
-    kubeconfig_name           = "eks_${module.eks.cluster_arn}"
-    clustername               = module.eks.cluster_arn
-    endpoint                  = data.aws_eks_cluster.cluster.endpoint
-    cluster_auth_base64       = data.aws_eks_cluster.cluster.certificate_authority[0].data
-  }
-}
-
-resource "local_file" "kubeconfig" {
-  content  = data.template_file.kubeconfig.rendered
-  filename = pathexpand("${var.kubeconfig_path}/config")
-}
-
-output "cluster_id" {
-  description = "ID of the created cluster"
-  value       = module.eks.cluster_id
 }
