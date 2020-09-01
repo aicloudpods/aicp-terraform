@@ -123,18 +123,7 @@ resource "aws_eks_fargate_profile" "aicp-fargate-profile" {
   subnet_ids             = module.vpc.private_subnets
 
   selector {
-    namespace = "kafka"
+    namespace = "spark"
   }
 
-  selector {
-    namespace = "minio"
-  }
-
-  selector {
-    namespace = "logging"
-  }
-
-  selector {
-    namespace = "monitoring"
-  }
 }
