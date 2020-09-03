@@ -87,9 +87,9 @@ module "eks" {
 
   node_groups = {
     aicp_node_group = {
-      desired_capacity = 1
+      desired_capacity = 3
       max_capacity     = 4
-      min_capacity     = 1
+      min_capacity     = 3
 
       instance_type = "t2.medium"
       k8s_labels = {
@@ -123,7 +123,7 @@ resource "aws_eks_fargate_profile" "aicp-fargate-profile" {
   subnet_ids             = module.vpc.private_subnets
 
   selector {
-    namespace = "spark"
+    namespace = "fg"
   }
 
 }
